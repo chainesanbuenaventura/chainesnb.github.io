@@ -111,6 +111,82 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--surface);
+    }
+
+    .tabs button {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .tabs button:hover {
+      color: var(--text);
+    }
+
+    .tabs button.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .tab-panel h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .tab-panel ul {
+      list-style: none;
+    }
+
+    .tab-panel li {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--surface);
+    }
+
+    .tab-panel li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .tab-panel a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .tab-panel a:hover {
+      text-decoration: underline;
+    }
+
+    .tab-panel .meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
   </style>
 </head>
 <body>
@@ -121,18 +197,73 @@
     </header>
 
     <main>
-      <p>Welcome. This is my GitHub Pages site.</p>
-      <p>You can edit <code>index.html</code> to add your own content, projects, or links.</p>
-
-      <nav class="links">
-        <a href="https://github.com/chainesanbuenaventura">GitHub</a>
-        <a href="https://github.com/chainesanbuenaventura/chainesnb.github.io">This repo</a>
+      <nav class="tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" aria-controls="panel-articles" id="tab-articles" class="active">Articles</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-publications" id="tab-publications">Publications</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-about" id="tab-about">About</button>
       </nav>
+
+      <div id="panel-articles" class="tab-panel active" role="tabpanel" aria-labelledby="tab-articles">
+        <h2>Articles</h2>
+        <p>Writing and blog posts.</p>
+        <ul>
+          <li>
+            <a href="#">Example article title</a>
+            <p class="meta">Short description or date</p>
+          </li>
+        </ul>
+      </div>
+
+      <div id="panel-publications" class="tab-panel" role="tabpanel" aria-labelledby="tab-publications">
+        <h2>Publications</h2>
+        <p>Papers, research, and other publications.</p>
+        <ul>
+          <li>
+            <a href="#">Example publication</a>
+            <p class="meta">Journal or venue · Year</p>
+          </li>
+        </ul>
+      </div>
+
+      <div id="panel-about" class="tab-panel" role="tabpanel" aria-labelledby="tab-about">
+        <h2>About</h2>
+        <p>Welcome. This is my GitHub Pages site.</p>
+        <p>You can edit <code>index.html</code> to add your own content, projects, or links.</p>
+        <nav class="links">
+          <a href="https://github.com/chainesanbuenaventura">GitHub</a>
+          <a href="https://github.com/chainesanbuenaventura/chainesnb.github.io">This repo</a>
+        </nav>
+      </div>
     </main>
 
     <footer>
       Hosted on <a href="https://pages.github.com/">GitHub Pages</a>
     </footer>
   </div>
+
+  <script>
+    (function() {
+      const tabs = document.querySelectorAll('.tabs button');
+      const panels = document.querySelectorAll('.tab-panel');
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          const targetId = this.getAttribute('aria-controls');
+
+          tabs.forEach(function(t) {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          panels.forEach(function(p) {
+            p.classList.remove('active');
+          });
+
+          this.classList.add('active');
+          this.setAttribute('aria-selected', 'true');
+          document.getElementById(targetId).classList.add('active');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
