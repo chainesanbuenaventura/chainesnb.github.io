@@ -7,15 +7,16 @@
   <title>chainesanbuenaventura</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f0f12;
-      --surface: #18181c;
-      --text: #e8e6e3;
-      --muted: #9b9996;
-      --accent: #7c9cff;
-      --accent-dim: #5a7ae8;
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
     }
 
     * {
@@ -25,16 +26,17 @@
     }
 
     html {
-      font-size: 18px;
+      font-size: 16px;
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'DM Sans', system-ui, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     .site-nav {
@@ -42,29 +44,29 @@
       top: 0;
       z-index: 100;
       background: var(--bg);
-      border-bottom: 1px solid var(--surface);
+      border-bottom: 1px solid var(--border);
       padding: 0 1.5rem;
     }
 
     .site-nav .nav-inner {
-      max-width: 640px;
+      max-width: 680px;
       margin: 0 auto;
       display: flex;
       gap: 0;
     }
 
     .site-nav button {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-size: 0.95rem;
+      font-family: inherit;
+      font-size: 0.875rem;
       font-weight: 500;
       color: var(--muted);
       background: none;
       border: none;
-      padding: 1rem 1.25rem;
+      padding: 1rem 1.5rem;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       margin-bottom: -1px;
-      transition: color 0.2s, border-color 0.2s;
+      transition: color 0.15s, border-color 0.15s;
     }
 
     .site-nav button:hover {
@@ -72,12 +74,12 @@
     }
 
     .site-nav button.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
+      color: var(--text);
+      border-bottom-color: var(--text);
     }
 
     .container {
-      max-width: 640px;
+      max-width: 680px;
       margin: 0 auto;
       padding: 3rem 1.5rem;
     }
@@ -92,33 +94,30 @@
     main p {
       color: var(--muted);
       margin-bottom: 1.5rem;
+      font-size: 0.9375rem;
     }
 
     .links {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
       margin-top: 2rem;
     }
 
     .links a {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       color: var(--accent);
       text-decoration: none;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
+      transition: color 0.15s;
     }
 
     .links a:hover {
-      color: var(--accent-dim);
-      border-bottom-color: var(--accent-dim);
+      color: var(--accent-hover);
     }
 
     code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9em;
+      font-family: ui-monospace, monospace;
+      font-size: 0.875em;
       background: var(--surface);
       padding: 0.2em 0.4em;
       border-radius: 4px;
@@ -127,8 +126,8 @@
     footer {
       margin-top: 4rem;
       padding-top: 2rem;
-      border-top: 1px solid var(--surface);
-      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8125rem;
       color: var(--muted);
     }
 
@@ -138,7 +137,7 @@
     }
 
     footer a:hover {
-      text-decoration: underline;
+      color: var(--accent-hover);
     }
 
     .tab-panel {
@@ -150,10 +149,11 @@
     }
 
     .tab-panel h2 {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
       font-weight: 600;
-      margin-bottom: 1rem;
       letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      color: var(--text);
     }
 
     .tab-panel ul {
@@ -161,9 +161,9 @@
     }
 
     .tab-panel li {
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--surface);
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
     }
 
     .tab-panel li:last-child {
@@ -172,19 +172,31 @@
       padding-bottom: 0;
     }
 
-    .tab-panel a {
+    .tab-panel li a {
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .tab-panel li a:hover {
+      color: var(--accent);
+    }
+
+    .tab-panel .meta {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      font-weight: 400;
+    }
+
+    .tab-panel p a {
       color: var(--accent);
       text-decoration: none;
     }
 
-    .tab-panel a:hover {
+    .tab-panel p a:hover {
       text-decoration: underline;
-    }
-
-    .tab-panel .meta {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 0.25rem;
     }
   </style>
 </head>
