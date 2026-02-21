@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="chainesnb — Personal site">
-  <title>chainesnb</title>
+  <meta name="description" content="Articles, publications, and about">
+  <title>chainesanbuenaventura</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -37,27 +37,56 @@
       line-height: 1.6;
     }
 
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--surface);
+      padding: 0 1.5rem;
+    }
+
+    .site-nav .nav-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+    }
+
+    .site-nav button {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: none;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .site-nav button:hover {
+      color: var(--text);
+    }
+
+    .site-nav button.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
     .container {
       max-width: 640px;
       margin: 0 auto;
-      padding: 4rem 1.5rem;
-    }
-
-    header {
-      margin-bottom: 4rem;
+      padding: 3rem 1.5rem;
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 600;
       letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
-    }
-
-    .tagline {
-      font-size: 1rem;
-      color: var(--muted);
-      font-weight: 400;
     }
 
     main p {
@@ -112,36 +141,6 @@
       text-decoration: underline;
     }
 
-    .tabs {
-      display: flex;
-      gap: 0;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--surface);
-    }
-
-    .tabs button {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--muted);
-      background: none;
-      border: none;
-      padding: 0.75rem 1.25rem;
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -1px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .tabs button:hover {
-      color: var(--text);
-    }
-
-    .tabs button.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-    }
-
     .tab-panel {
       display: none;
     }
@@ -190,18 +189,16 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>chainesnb</h1>
-      <p class="tagline">Personal site</p>
-    </header>
+  <nav class="site-nav" role="tablist">
+    <div class="nav-inner">
+      <button type="button" role="tab" aria-selected="true" aria-controls="panel-articles" id="tab-articles" class="active">Articles</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="panel-publications" id="tab-publications">Publications</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="panel-about" id="tab-about">About</button>
+    </div>
+  </nav>
 
+  <div class="container">
     <main>
-      <nav class="tabs" role="tablist">
-        <button type="button" role="tab" aria-selected="true" aria-controls="panel-articles" id="tab-articles" class="active">Articles</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="panel-publications" id="tab-publications">Publications</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="panel-about" id="tab-about">About</button>
-      </nav>
 
       <div id="panel-articles" class="tab-panel active" role="tabpanel" aria-labelledby="tab-articles">
         <h2>Articles</h2>
@@ -227,8 +224,7 @@
 
       <div id="panel-about" class="tab-panel" role="tabpanel" aria-labelledby="tab-about">
         <h2>About</h2>
-        <p>Welcome. This is my GitHub Pages site.</p>
-        <p>You can edit <code>index.html</code> to add your own content, projects, or links.</p>
+        <p>Add a short bio or introduction here.</p>
         <nav class="links">
           <a href="https://github.com/chainesanbuenaventura">GitHub</a>
           <a href="https://github.com/chainesanbuenaventura/chainesnb.github.io">This repo</a>
@@ -243,13 +239,11 @@
 
   <script>
     (function() {
-      const tabs = document.querySelectorAll('.tabs button');
+      const tabs = document.querySelectorAll('.site-nav button');
       const panels = document.querySelectorAll('.tab-panel');
-
       tabs.forEach(function(tab) {
         tab.addEventListener('click', function() {
           const targetId = this.getAttribute('aria-controls');
-
           tabs.forEach(function(t) {
             t.classList.remove('active');
             t.setAttribute('aria-selected', 'false');
@@ -257,7 +251,6 @@
           panels.forEach(function(p) {
             p.classList.remove('active');
           });
-
           this.classList.add('active');
           this.setAttribute('aria-selected', 'true');
           document.getElementById(targetId).classList.add('active');
